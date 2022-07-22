@@ -84,4 +84,4 @@ class Logout(APIView):
             'message': 'Успешно'
         }
 
-        return
+        return response
