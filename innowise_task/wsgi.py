@@ -1,5 +1,5 @@
 """
-WSGI config for innowise_task project.
+WSGI configs for innowise_task project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

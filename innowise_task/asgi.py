@@ -1,5 +1,5 @@
 """
-ASGI config for innowise_task project.
+ASGI configs for innowise_task project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
