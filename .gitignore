@@ -1,0 +1,9 @@
+/venv/data/postgres/pg_multixact/members/0000
+/data/postgres
+/data
+/base
+/dataSources
+/configs
+/venv
+.idea
+__pycache__/
