@@ -12,21 +12,21 @@ class User(AbstractUser):
 
 
 class Ticket(models.Model):
-    STATUS = (
-        ('open', 'open'),
-        ('closed', 'closed')
-    )
+    class Status(models.TextChoices):
+        STATUS_CLOSED = 'closed'
+        STATUS_OPEN = 'open'
     title = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     category = models.ForeignKey("Category", on_delete=models.CASCADE)
     answer = models.TextField(default='')
     created = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=7, choices=STATUS, default='open')
+    status = models.CharField(max_length=7, choices=Status.choices, default='open')
     modified = models.DateTimeField(auto_now_add=True)
 
+    @property
     def __str__(self):
-        return "{}".format(self.title)
+        return f"{self.title}"
 
     class Meta:
         ordering = ["-created"]
