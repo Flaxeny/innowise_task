@@ -25,10 +25,10 @@ class LoginView(APIView):
         user = User.objects.filter(email=email).first()
 
         if not user:
-            raise AuthenticationFailed('Пользователь не найден')
+            raise AuthenticationFailed('User not found')
 
         if not user.check_password(password):
-            raise AuthenticationFailed('Неверный пароль')
+            raise AuthenticationFailed('Incorrect password')
 
         payload = {
             'id': user.id,
@@ -63,12 +63,12 @@ class UserView(APIView):
         token = request.COOKIES.get('jwt')
 
         if not token:
-            raise AuthenticationFailed('Не прошедший проверку подлинности!')
+            raise AuthenticationFailed('Failure to authenticate!')
 
         try:
             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
         except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed('Не прошедший проверку подлинности!')
+            raise AuthenticationFailed('Failure to authenticate!')
 
         user = User.objects.filter(id=payload['id']).first()
 
@@ -81,7 +81,7 @@ class Logout(APIView):
         response = Response()
         response.delete_cookie('jwt')
         response.data = {
-            'message': 'Успешно'
+            'message': 'Successfully'
         }
 
         return response
